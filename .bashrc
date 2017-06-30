@@ -9,7 +9,12 @@ case $- in
 esac
 
 # load all dotfiles in dotfiles repository
-for DOTFILE in `find ~/.dotfiles/system/.{functions,prompt,alias,path,env}`
+for DOTFILE in `find $(dirname $(readlink -f ~/.bashrc))/system/.{prompt,functions,alias,path,env}`
 do
-  [ -f “$DOTFILE” ] && source “$DOTFILE”
+    [ -f "$DOTFILE" ] && source "$DOTFILE"
 done
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    source /etc/bashrc
+fi

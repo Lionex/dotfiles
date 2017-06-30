@@ -1,6 +1,3 @@
-# Get terminal color theme trhough Gogh
-wget -O xt  http://git.io/v3D8e && chmod +x xt && ./xt && rm xt
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -76,11 +73,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# load custom theme for git prompt
-sh ~/.dotfiles/git/.git-prompt-colors.sh
-
 # configure git prompt
 GIT_PROMPT_THEME="Custom"
 GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_FETCH_REMOTE_STATUS=0
 source ~/.bash-git-prompt/gitprompt.sh
 export PATH=$HOME/.bin:$PATH
+
+# load custom theme for git prompt
+source $(dirname $(readlink -f ~/.bashrc))/git/.git-prompt-colors.sh

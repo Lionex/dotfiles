@@ -1,6 +1,6 @@
 web-install() {
     local url=$1
-    local temp_file="/tmp/temp-wget.deb"
+    local temp_file="/tmp/web-install.deb"
 
     sudo wget -O $temp_file "$url" &&
     sudo dpkg -i --skip-same-version $temp_file &&
