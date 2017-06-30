@@ -9,10 +9,12 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 BOLD='\033[1m'
 
+DIR=$(pwd -L)
+
 echo "\n${GREEN}linking config files...${NC}\n"
 
-ln -sfv "$DIR/.bashrc" ~
-ln -sfv "$DIR/profiles/.bash_profile" ~
-ln -sfv "$DIR/profiles/.inputrc" ~
-ln -sfv "$DIR/git/.gitconfig" ~
-ln -sfv "$DIR/git/.gitignore_global" ~
+ln -sbv "$DIR/.bashrc" ~
+ln -sbv "$DIR/profiles/.bash_profile" ~
+ln -sbv "$DIR/profiles/.inputrc" ~
+ln -sbv "$DIR/git/.gitconfig" ~
+ln -sbv "$DIR/git/.gitignore_global" ~
