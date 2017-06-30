@@ -1,0 +1,59 @@
+[user]
+	email = Gwen@Lofman.co
+	name = Gwen Lofman
+[push]
+	default = simple
+[core]
+	editor = vi
+	excludesfile = ~/.gitignore_global
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+[alias]
+	# "Custom" commands
+	# diff against characters instead of lines
+	diff-words = diff --word-diff
+	dw         = !git diff-words
+	# unstage files from the staging index
+	unstage    = reset HEAD --
+	uns        = !git unstage 
+	# fixup last few commits
+	fixup      = rebase -i origin/
+	fx         = !git fixup
+
+	# abbreviated commands
+	st  = status -sb
+	sts = status
+	ci  = commit -v
+	am  = commit -v --amend
+	cnv = commit -v --no-verify
+	br  = branch -vv
+	co  = checkout
+	rb  = rebase
+	ap  = add -p
+	ps  = push
+	pu  = pull
+
+	# logging commands
+	his  = log --pretty=\"%C(auto)[%h:%ad] %s%d \" --graph --date=short --decorate
+	lgl  = log --pretty=\"%C(auto)[%h:%ad] %an %d%n%s%n%w(72,4,4)%b\" --date=short --graph --decorate
+	lg   = !git his
+	lgs  = !git his -5
+	lst  = !git his --stat
+	lpa  = !git his -p
+	last = !git lgl -1 --patch
+	lgh  = !git lgl -1 --stat
+	lgt  = !git his --all --simplify-by-decoration
+	sl   = !git lgs && git st
+
+	# file logging commands
+	fl  = !git his --follow --
+	fll = !git lgl --follow --
+	fst = !git lst --follow --
+	fpa = !git lpa --follow --
+	ds = diff --stat
+[commit]
+	verbose = true
+[help]
+	autocorrect = 10

@@ -1,0 +1,19 @@
+# OS files
+.*.swp
+*~
+.fuse_hidden*
+.Trash-*
+.nfs*
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Configuration Files
+.bash-git-rc
