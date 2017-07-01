@@ -11,13 +11,13 @@ BOLD='\033[1m'
 
 DIR=$(pwd -L)
 
-echo "\n${GREEN}installing packages...${NC}"
+echo -e "\n${GREEN}installing packages...${NC}"
 
 # load all dotfiles in dotfiles repository
 for INSTALLER in `find $(pwd -L)/install/`
 do
     [ -f "$INSTALLER" ] &&
-    echo "\n$(date): running ${BOLD}$(basename $INSTALLER)${NC}" &&
+    echo -e "\n$(date): running ${BOLD}$(basename $INSTALLER)${NC}" &&
     . "$INSTALLER"
 done
 
