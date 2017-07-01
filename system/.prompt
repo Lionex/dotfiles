@@ -79,6 +79,3 @@ GIT_PROMPT_ONLY_IN_REPO=1
 GIT_PROMPT_FETCH_REMOTE_STATUS=0
 source ~/.bash-git-prompt/gitprompt.sh
 export PATH=$HOME/.bin:$PATH
-
-# load custom theme for git prompt
-source $(dirname $(readlink -f ~/.bashrc))/git/.git-prompt-colors.sh
