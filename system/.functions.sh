@@ -6,3 +6,7 @@ web-install() {
     sudo dpkg -i --skip-same-version $temp_file &&
     sudo rm $temp_file
 }
+
+mkcd() {
+    mkdir $1; cd $1
+}
