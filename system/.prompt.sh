@@ -1,40 +1,41 @@
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+__set_prompt() {
+  local EXIT="$?"
+  # Capture last command exit flag first
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
+  # If color support exists, set color values, otherwise set them as empty
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    local nc="\[\033[0m\]"
+    local red="\[\033[00;31m\]"
+    local grn="\[\033[00;32m\]"
+    local bgrn="\[\033[01;32m\]"
+    local bblu="\[\033[01;34m\]"
+  else
+    local nc="";
+    local grn="";
+    local red="";
+    local bgrn="";
+    local bblu=""
+  fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+  # Clear out prompt
+  PS1=""
 
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-  # We have color support; assume it's compliant with Ecma-48
-  # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-  # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-else
-    color_prompt=
-fi
+  # If the last command didn't exit 0, display the exit code
+  [ "$EXIT" -ne "0" ] && PS1+="$red$EXIT $nc"
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+  # identify debian chroot, if one exists
+  if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    PS1+="${debian_chroot:+($(cat /etc/debian_chroot))}"
+  fi
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+  PS1+="$bgrn\u$grn@\h$nc:$bblu\w$nc"
+
+  PS1+="\$ "
+}
+export PROMPT_COMMAND=__set_prompt
 
 # configure git prompt
 GIT_PROMPT_THEME="Custom"
