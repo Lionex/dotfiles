@@ -11,7 +11,7 @@ esac
 DIR="$(dirname $(readlink -f ~/.bashrc))"
 
 # load all dotfiles in dotfiles repository
-for DOTFILE in `find $DIR/system/.{prompt,functions,alias,path,env}.sh`
+for DOTFILE in `find $DIR/system/.{prompt,alias,functions,path,env}.sh`
 do
     [ -f "$DOTFILE" ] && source "$DOTFILE"
 done
