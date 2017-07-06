@@ -1,4 +1,6 @@
 web-install() {
+    [ -z $1 ] &&  echo "usage: web-install [url]" && return 1
+
     local url=$1
     local temp_file="/tmp/web-install.deb"
 
