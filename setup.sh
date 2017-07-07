@@ -11,7 +11,7 @@ BOLD='\033[1m'
 
 DIR=$(pwd -L)
 
-echo "\n${GREEN}linking config files...${NC}\n"
+echo -e "\n${GREEN}linking config files...${NC}\n"
 
 ln -sbv "$DIR/.bashrc" ~
 ln -sbv "$DIR/profiles/.bash_profile" ~
