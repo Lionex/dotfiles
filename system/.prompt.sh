@@ -1,3 +1,12 @@
+#!/bin/bash
+
+# configure git prompt
+GIT_PROMPT_THEME="Custom"
+GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_FETCH_REMOTE_STATUS=0
+source ~/.bash-git-prompt/gitprompt.sh
+export PATH=$HOME/.bin:$PATH
+
 __set_prompt() {
   local EXIT="$?"
   # Capture last command exit flag first
@@ -24,7 +33,7 @@ __set_prompt() {
   PS1=""
 
   # If the last command didn't exit 0, display the exit code
-  [ "$EXIT" -ne "0" ] && PS1+="$red$EXIT $nc"
+  [ "$EXIT" -ne "0" ] && PS1+="$red$EXIT$nc "
 
   # identify debian chroot, if one exists
   if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -36,10 +45,3 @@ __set_prompt() {
   PS1+="\$ "
 }
 export PROMPT_COMMAND=__set_prompt
-
-# configure git prompt
-GIT_PROMPT_THEME="Custom"
-GIT_PROMPT_ONLY_IN_REPO=1
-GIT_PROMPT_FETCH_REMOTE_STATUS=0
-source ~/.bash-git-prompt/gitprompt.sh
-export PATH=$HOME/.bin:$PATH
