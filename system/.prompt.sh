@@ -115,7 +115,7 @@ __set_prompt() {
   fi
 
   if [ "$(__is_git_repo)" -eq "0" ]; then
-    local stats="$(__git_stats "($bpur%b$bgrn%+$bred%-$nc)[$grn%A%R%S$ylw%M$red%D%U$nc]$bred%X$nc")"
+    local stats="$(__git_stats "($bpur%b$bgrn%+$bred%-$nc)$grn%A%R%S$ylw%M$red%D%U$nc$bred%X$nc")"
     PS1+="$stats:$blu\w$nc\n\$ "
   else
     PS1+="$bgrn\u$grn@\h$nc:$bblu\w$nc\$ "
