@@ -19,14 +19,22 @@ __set_prompt() {
     local nc="\[\033[0m\]"
     local red="\[\033[00;31m\]"
     local grn="\[\033[00;32m\]"
+    local ylw="\[\033[00;33m\]"
+    local blu="\[\033[00;34m\]"
     local bgrn="\[\033[01;32m\]"
+    local bylw="\[\033[01;33m\]"
     local bblu="\[\033[01;34m\]"
+    local bpur="\[\033[01;35m\]"
   else
-    local nc="";
-    local grn="";
-    local red="";
-    local bgrn="";
+    local nc=""
+    local red=""
+    local grn=""
+    local ylw=""
+    local blu=""
+    local bgrn=""
+    local bylw=""
     local bblu=""
+    local bpur=""
   fi
 
   # Clear out prompt
