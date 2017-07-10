@@ -15,7 +15,7 @@ __formatter() {
   echo "$formatted"
 }
 
-__git_stats() {
+__git_stats() { # (format)
   # Check if stats is in a git repository
   [ "$(__is_git_repo)" -ne 0 ] && echo "not a git repository" && return 128
 
@@ -33,14 +33,18 @@ __git_stats() {
   \t%U\tnumber of untracked files with a U in front
   \t%+\tnumber of commits ahead of tracking branch with + as prefix
   \t%-\tnumber of commits behind tracking branch with - as prefix
+
   example: __git_stats (%b%+%-)[%u%m%d%R]
+
   \tnote: __git_stats will clear out any empty braces" && return 2
 
   local format="$1"
   local st="$(git status --porcelain)"
+  local branch="$(git symbolic-ref --short HEAD)"
+  local upstream="$(git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD))"
 
   # Get the current branch and replace branch format specifier
-  format="${format//\%b/$(git symbolic-ref --short HEAD)}"
+  format="${format//\%b/$branch}"
 
   format="$(__formatter "m" "M" "M" "^.M" $format)"
   format="$(__formatter "s" "S" "M" "^M" $format)"
@@ -50,19 +54,15 @@ __git_stats() {
   format="$(__formatter "d" "D" "D" "^D" $format)"
   format="$(__formatter "x" "X" "UU" "^UU" $format)"
 
-  local ahead="0"
-  if [ "$ahead" -gt "0" ]; then
-    format="${format//\%+/+$ahead}"
-  else
-    format="${format//\%+/}"
-  fi
+  if git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
+    local ahead="$(git rev-list --left-right $upstream..$branch | grep -c '>')"
+    [ "$ahead" -gt "0" ] && format="${format//\%+/+$ahead}"
 
-  local behind="0"
-  if [ "$behind" -gt "0" ]; then
-    format="${format//\%-/-$behind}"
-  else
-    format="${format//\%-/}"
+    local behind="$(git rev-list --left-right $branch..$upstream | grep -c '>')"
+    [ "$behind" -gt "0" ] && format="${format//\%-/-$behind}"
   fi
+  format="${format//\%+/}"
+  format="${format//\%-/}"
 
   # Clear out empty braces if substitutions have resulted in empty braces
   format="${format//()/}"
@@ -116,7 +116,7 @@ __set_prompt() {
 
   if [ "$(__is_git_repo)" -eq "0" ]; then
     local stats="$(__git_stats "($bpur%b$bgrn%+$bred%-$nc)$grn%A%R%S$ylw%M$red%D%U$nc$bred%X$nc")"
-    PS1+="$stats:$blu\w$nc\n\$ "
+    PS1+="$stats:$bylw\w$nc\n\$ "
   else
     PS1+="$bgrn\u$grn@\h$nc:$bblu\w$nc\$ "
   fi
