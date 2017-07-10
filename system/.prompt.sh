@@ -23,20 +23,26 @@ __git_stats() { # (format)
   [ -z "$1" ] && echo -e "\033[1;37musage: __git_stats [format]\033[0m
   format parameters:
   \t%b\tbranch name
-  \t%m\tnumber of modified files
-  \t%M\tnumber of modified files with an M in front
+  \t%a\tnumber of added files
+  \t%A\tnumber of added files with an A in front
   \t%d\tnumber of deleted files
   \t%D\tnumber of deleted files with a D in front
+  \t%m\tnumber of modified files, or number of files with unstaged changes
+  \t%M\tnumber of modified files with an M in front
   \t%r\tnumber of renamed files
   \t%R\tnumber of renamed files with an R in front
+  \t%s\tnumber of staged files with changes
+  \t%S\tnumber of staged files with an M in front
   \t%u\tnumber of untracked files
-  \t%U\tnumber of untracked files with a U in front
+  \t%U\tnumber of untracked files with a ? in front
+  \t%x\tnumber of confilcts on a merge
+  \t%X\tnumber of confilcts on a merge with a UU in front
   \t%+\tnumber of commits ahead of tracking branch with + as prefix
   \t%-\tnumber of commits behind tracking branch with - as prefix
 
-  example: __git_stats (%b%+%-)[%u%m%d%R]
-
-  \tnote: __git_stats will clear out any empty braces" && return 2
+  \texample: __git_stats \"(%b%+%-)[%u%m%d%R]\"
+  \t__git_stats will clear out any empty braces, specifically <>,
+  \t\t(), [], and {}" && return 2
 
   local format="$1"
   local st="$(git status --porcelain)"
