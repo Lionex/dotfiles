@@ -91,16 +91,6 @@ __set_prompt() {
     local bylw="\[\033[01;33m\]"
     local bblu="\[\033[01;34m\]"
     local bpur="\[\033[01;35m\]"
-  else
-    local nc=""
-    local red=""
-    local grn=""
-    local ylw=""
-    local blu=""
-    local bgrn=""
-    local bylw=""
-    local bblu=""
-    local bpur=""
   fi
 
   # Clear out prompt
@@ -115,7 +105,7 @@ __set_prompt() {
   fi
 
   if [ "$(__is_git_repo)" -eq "0" ]; then
-    local stats="$(__git_stats "($bpur%b$bgrn%+$bred%-$nc)$grn%A%R%S$ylw%M$red%D%U$nc$bred%X$nc")"
+    local stats="$(__git_stats "($bpur%b$grn%+$red%-$nc)$grn%A%R%S$red%M%D%U%X$nc")"
     PS1+="$stats:$bylw\w$nc\n\$ "
   else
     PS1+="$bgrn\u$grn@\h$nc:$bblu\w$nc\$ "
