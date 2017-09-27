@@ -17,7 +17,7 @@
 	dw         = !git diff-words
 	# unstage files from the staging index
 	unstage    = reset HEAD --
-	uns        = !git unstage 
+	uns        = !git unstage
 	# fixup last few commits
 	fixup      = rebase -i origin/
 	fx         = !git fixup
