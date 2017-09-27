@@ -16,5 +16,6 @@ echo -e "\n${GREEN}linking config files...${NC}\n"
 ln -sbv "$DIR/.bashrc" ~
 ln -sbv "$DIR/profiles/.bash_profile" ~
 ln -sbv "$DIR/profiles/.inputrc" ~
+ln -sbv "$DIR/profiles/.vimrc" ~
 ln -sbv "$DIR/git/.gitconfig" ~
 ln -sbv "$DIR/git/.gitignore_global" ~
