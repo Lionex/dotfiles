@@ -36,15 +36,15 @@
 	pu  = pull
 
 	# logging commands
-	his  = log --pretty=\"%C(auto)[%h:%ad] %s%d \" --graph --date=short --decorate
+	his  = log --pretty=\"%C(auto)[%h:%ad] %s%d \" --date=short
 	lgl  = log --pretty=\"%C(auto)[%h:%ad] %an %d%n%s%n%w(72,4,4)%b\" --date=short --graph --decorate
-	lg   = !git his
+	lg   = !git his --decorate --graph
 	lgs  = !git his -5
-	lst  = !git his --stat
-	lpa  = !git his -p
+	lst  = !git lg --stat
+	lpa  = !git lg -p
 	last = !git lgl -1 --patch
 	lgh  = !git lgl -1 --stat
-	lgt  = !git his --all --simplify-by-decoration
+	lgt  = !git lg --all --simplify-by-decoration
 	sl   = !git lgs && git st
 
 	# file logging commands
