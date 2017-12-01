@@ -10,4 +10,4 @@ export PATH="/home/gwen/.stack/programs/x86_64-linux/ghc-7.10.3/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 ## Matlab
-export PATH="/usr/local/MATLAB/R2017a/bin:$PATH"
+export PATH="~/.MATLAB/R2017b/bin/matlab:$PATH"
