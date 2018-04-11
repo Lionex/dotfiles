@@ -22,3 +22,6 @@ unset DIR
 if [ -f /etc/bashrc ]; then
     source /etc/bashrc
 fi
+
+# added by Anaconda3 installer
+export PATH="/home/gwen/.anaconda/3/bin:$PATH"

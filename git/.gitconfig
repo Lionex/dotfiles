@@ -1,5 +1,5 @@
 [user]
-	email = Gwen@Lofman.co
+	email = Gwen@Lofman.io
 	name = Gwen Lofman
 [push]
 	default = simple
@@ -26,7 +26,7 @@
 	gt         = !git get
 
 	# abbreviated commands
-	st  = status -sb
+	st  = status -sbu
 	sts = status
 	ci  = commit -v
 	am  = commit -v --amend
@@ -37,6 +37,8 @@
 	ap  = add -p
 	ps  = push
 	pu  = pull
+	ds = diff --stat
+	dc  = diff --cached
 
 	# logging commands
 	his  = log --pretty=\"%C(auto)[%h:%ad] %s%d \" --date=short
@@ -55,7 +57,6 @@
 	fll = !git lgl --follow --
 	fst = !git lst --follow --
 	fpa = !git lpa --follow --
-	ds = diff --stat
 [commit]
 	verbose = true
 [help]
