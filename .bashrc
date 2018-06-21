@@ -8,7 +8,7 @@ case $- in
       *) return;;
 esac
 
-DIR="$(dirname $(readlink -f ~/.bashrc))"
+DIR="$(dirname $(readlink ~/.bashrc))"
 
 # load all dotfiles in dotfiles repository
 for DOTFILE in `find $DIR/system/.{prompt,alias,functions,path,env}.sh`
