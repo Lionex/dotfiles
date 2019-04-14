@@ -13,9 +13,10 @@ DIR=$(pwd -L)
 
 echo -e "\n${GREEN}linking config files...${NC}\n"
 
-ln -sv "$DIR/.bashrc" ~
-ln -sv "$DIR/profiles/.bash_profile" ~
-ln -sv "$DIR/profiles/.inputrc" ~
-ln -sv "$DIR/profiles/.vimrc" ~
-ln -sv "$DIR/git/.gitconfig" ~
-ln -sv "$DIR/git/.gitignore_global" ~
+ln -sbv "$DIR/.bashrc" ~
+ln -sbv "$DIR/profiles/.bash_profile" ~
+ln -sbv "$DIR/profiles/.inputrc" ~
+ln -sbv "$DIR/profiles/.vimrc" ~
+ln -sbv "$DIR/git/.gitconfig" ~
+ln -sbv "$DIR/git/.gitignore_global" ~
+ln -sbv "$DIR/git/.gitattributes_global" ~

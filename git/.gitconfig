@@ -6,10 +6,22 @@
 [core]
 	editor = vi
 	excludesfile = ~/.gitignore_global
+    attributesfile = ~/.gitattributes_global
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+
+[filter "nbstrip_full"]
+clean = "jq --indent 1 \
+        '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
+        | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
+        | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
+        | .cells[].metadata = {} \
+        '"
+smudge = cat
+required = true
+
 [alias]
 	# "Custom" commands
 	# diff against characters instead of lines
