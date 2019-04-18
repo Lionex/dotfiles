@@ -17,6 +17,7 @@ ln -sbv "$DIR/.bashrc" ~
 ln -sbv "$DIR/profiles/.bash_profile" ~
 ln -sbv "$DIR/profiles/.inputrc" ~
 ln -sbv "$DIR/profiles/.vimrc" ~
+ln -sbv "$DIR/profiles/.spacemacs" ~
 ln -sbv "$DIR/git/.gitconfig" ~
 ln -sbv "$DIR/git/.gitignore_global" ~
 ln -sbv "$DIR/git/.gitattributes_global" ~
