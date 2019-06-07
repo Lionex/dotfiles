@@ -21,3 +21,4 @@ ln -sbv "$DIR/profiles/.spacemacs" ~
 ln -sbv "$DIR/git/.gitconfig" ~
 ln -sbv "$DIR/git/.gitignore_global" ~
 ln -sbv "$DIR/git/.gitattributes_global" ~
+ln -sbv "$DIR/service/emacs.service" ~/.config/systemd/user/
