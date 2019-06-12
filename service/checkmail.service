@@ -1,0 +1,8 @@
+[Unit]
+Description=check for mail
+RefuseManualStart=no
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+ExecStart=/home/gwen/.dotfiles/mail/checkmail.sh

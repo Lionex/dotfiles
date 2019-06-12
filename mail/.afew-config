@@ -1,0 +1,35 @@
+# default filter chain
+[SpamFilter]
+[KillThreadsFilter]
+[ListMailsFilter]
+
+[Filter.5]
+message = "List Inbox"
+query = 'tag:lists'
+tags = +unread;-new;-inbox
+
+[SentMailsFilter]
+sent_tag = sent
+[ArchiveSentMailsFilter]
+
+[Filter.1]
+message = "SIGGRAPH SV2019"
+query = 'tag:lists/f50f289fa9d490d3d251cb65e'
+tags = +sv2019;+siggraph;-lists/f50f289fa9d490d3d251cb65e;+unread;-new
+
+[Filter.2]
+message = "Job Search"
+query = 'to:contact@lofman.io'
+tags = +job_search;-new;+unread
+
+[Filter.3]
+message = "Social messages"
+query = 'from:redditmail.com OR from:facebookmail.com OR from:linkedin.com'
+tags = +social;-new;+unread
+
+[Filter.4]
+message = "Bank"
+query = 'from:suntrust.com OR from:chase.com'
+tags = +finance;+unread;-new
+
+[InboxFilter]

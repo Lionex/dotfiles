@@ -1,0 +1,54 @@
+# Address to connect to
+ImapAccount gwenlofmanio
+Host imap.gmail.com
+Port 993
+User "gwen@lofman.io"
+PassCmd "secret-tool lookup gwen@lofman.io app_password"
+AuthMech LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile ~/.cert/mail.gmail.cer
+CertificateFile ~/.cert/mail.google.cer
+
+IMAPStore gwenlofmanio-remote
+Account gwenlofmanio
+
+MaildirStore gwenlofmanio-local
+Path ~/.mail/gwenlofman/
+Inbox ~/.mail/gwenlofman/Inbox
+
+Channel gwenlofmanio-default
+Master :gwenlofmanio-remote:
+Slave :gwenlofmanio-local:Inbox
+#Patterns INBOX
+
+Channel gwenlofmanio-sent
+Master :gwenlofmanio-remote:"[Gmail]/Sent Mail"
+slave  :gwenlofmanio-local:Sent
+
+Channel gwenlofmanio-trash
+Master :gwenlofmanio-remote:"[Gmail]/Trash"
+slave  :gwenlofmanio-local:Trash
+
+Channel gwenlofmanio-archive
+Master :gwenlofmanio-remote:"[Gmail]/All Mail"
+slave  :gwenlofmanio-local:All
+
+Channel gwenlofmanio-junk
+Master :gwenlofmanio-remote:"[Gmail]/Spam"
+slave  :gwenlofmanio-local:Junk
+
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Automatically delete messages on either side if they are found deleted on the other.
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+
+Group gwenlofmanio
+Channel gwenlofmanio-default
+Channel gwenlofmanio-trash
+Channel gwenlofmanio-archive
+Channel gwenlofmanio-sent
+Channel gwenlofmanio-junk

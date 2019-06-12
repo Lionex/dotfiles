@@ -13,12 +13,29 @@ DIR=$(pwd -L)
 
 echo -e "\n${GREEN}linking config files...${NC}\n"
 
+# System profiles
+echo -e "\n\t${BOLD}System profiles...${NC}\n"
 ln -sbv "$DIR/.bashrc" ~
 ln -sbv "$DIR/profiles/.bash_profile" ~
 ln -sbv "$DIR/profiles/.inputrc" ~
+
+# Text editor config
+echo -e "\n\t${BOLD}Text editors...${NC}\n"
 ln -sbv "$DIR/profiles/.vimrc" ~
 ln -sbv "$DIR/profiles/.spacemacs" ~
+ln -sbv "$DIR/service/emacs.service" ~/.config/systemd/user/
+
+# Git
+echo -e "\n\t${BOLD}git...${NC}\n"
 ln -sbv "$DIR/git/.gitconfig" ~
 ln -sbv "$DIR/git/.gitignore_global" ~
 ln -sbv "$DIR/git/.gitattributes_global" ~
-ln -sbv "$DIR/service/emacs.service" ~/.config/systemd/user/
+
+# e-mail
+echo -e "\n\t${BOLD}email...${NC}\n"
+ln -sbv "$DIR/mail/.mbsyncrc" ~
+ln -sbv "$DIR/mail/.msmtprc" ~
+ln -sbv "$DIR/mail/.notmuch-config" ~
+ln -sbv "$DIR/mail/.afew-config" ~/.config/afew/config
+ln -sbv "$DIR/service/checkmail.service" ~/.config/systemd/user/
+ln -sbv "$DIR/service/checkmail.timer" ~/.config/systemd/user/

@@ -50,7 +50,7 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
+     spell-checking
      ;; syntax-checking
      ;; version-control
      )
@@ -296,7 +296,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup trailing
+   dotspacemacs-whitespace-cleanup 'trailing
    ))
 
 (defun dotspacemacs/user-init ()
@@ -306,7 +306,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  
+  (autoload 'notmuch "notmuch" "notmuch mail" t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -316,6 +316,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; useful crux settings
   (unless (package-installed-p 'crux)
     (package-refresh-contents)
     (package-install 'crux))
@@ -323,6 +325,59 @@ you should place your code here."
   (global-set-key [(shift return)] #'crux-smart-open-line)
   (global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
   (global-set-key (kbd "C-<backspace>") #'crux-kill-line-backwards)
+
+  ;; notmuch configuration
+  (global-set-key (kbd "C-c m") `notmuch)
+  (setq notmuch-fcc-dirs "~/.mail/gwenlofman/Sent")
+
+  (setq user-mail-address "Gwen@Lofman.io"
+        user-full-name "Gwen Lofman")
+
+  ;; hotkeys
+  (define-key notmuch-search-mode-map "D"
+    (lambda ()
+      "Delete message"
+      (interactive)
+      (notmuch-search-tag (list "-inbox" "+deleted" "-unread"))
+      (next-line)))
+
+  (define-key notmuch-search-mode-map "S"
+    (lambda ()
+      "mark message as spam"
+      (interactive)
+      (notmuch-search-tag (list "-inbox" "+spam" "-unread"))
+      (next-line)))
+
+  (define-key notmuch-search-mode-map "r"
+    (lambda ()
+      "mark message as spam"
+      (interactive)
+      (notmuch-search-tag (list "-unread"))
+      (next-line)))
+
+  (define-key notmuch-search-mode-map "a"
+    (lambda ()
+      "mark message as spam"
+      (interactive)
+      (notmuch-search-tag (list "-inbox" "+account"))
+      (next-line)))
+
+  (define-key notmuch-search-mode-map "l"
+    (lambda ()
+      "mark message as spam"
+      (interactive)
+      (notmuch-search-tag (list "-inbox" "+lists"))
+      (next-line)))
+
+  ;; Sending emails
+  (setq send-mail-function (quote sendmail-send-it))
+  (setq sendmail-program "~/.dotfiles/mail/msmtp-enqueue.sh"
+        mail-specify-envelope-from t
+        ;; needed for debians message.el cf. README.Debian.gz
+        message-sendmail-f-is-evil nil
+        mail-envelope-from 'header
+        message-sendmail-envelope-from 'header)
+  (setq message-kill-buffer-on-exit t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -332,8 +387,24 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(notmuch-saved-searches
+   '((:name "new mail" :query "tag:inbox AND 1551416400.." :key "i" :sort-order newest-first)
+     (:name "inbox" :query "tag:inbox AND ..1551416400" :key "I" :sort-order newest-first)
+     (:name "unread" :query "tag:unread" :key "n")
+     (:name "flagged" :query "tag:flagged" :key "f")
+     (:name "sent" :query "tag:sent" :key "t" :sort-order newest-first)
+     (:name "drafts" :query "tag:draft" :key "d")
+     (:name "all mail" :query "*" :key "a")
+     (:name "work" :query "tag:work AND tag:unread" :key "w")
+     (:name "job search" :query "tag:job_search AND tag:unread")
+     (:name "finance" :query "tag:finance AND tag:unread")
+     (:name "account updates" :query "tag:account AND tag:unread")
+     (:name "git" :query "tag:git AND tag:unread")
+     (:name "increment mag" :query "from:increment.com AND tag:unread")
+     (:name "lists" :query "tag:lists AND tag:unread")
+     (:name "SIGGRAPH TL 2019" :query "tag:sv2019 AND tag:unread")))
  '(package-selected-packages
-   '(mmm-mode markdown-toc gh-md yaml-mode crux toml-mode racer pos-tip cargo markdown-mode rust-mode ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy)))
+   '(notmuch flyspell-correct-ivy flyspell-correct auto-dictionary mmm-mode markdown-toc gh-md yaml-mode crux toml-mode racer pos-tip cargo markdown-mode rust-mode ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
