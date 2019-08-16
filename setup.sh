@@ -25,6 +25,10 @@ ln -sbv "$DIR/profiles/.vimrc" ~
 ln -sbv "$DIR/profiles/.spacemacs" ~
 ln -sbv "$DIR/service/emacs.service" ~/.config/systemd/user/
 
+# Terminal Config
+echo -e "\n\t${BOLD}Terminal Emulator...${NC}\n"
+ln -sbv "$DIR/profiles/.alacritty.yml" ~
+
 # Git
 echo -e "\n\t${BOLD}git...${NC}\n"
 ln -sbv "$DIR/git/.gitconfig" ~
