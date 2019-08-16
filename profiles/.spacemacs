@@ -31,26 +31,30 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     html
      markdown
      yaml
      (rust :variables
            rust-format-on-save t)
+     (c-c++ :variables c-c++-enable-clang-support t)
+     shaders
+     semantic
+     ivy
+     emacs-lisp
+     org
+     spell-checking
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
      ;; auto-completion
      ;; better-defaults
-     emacs-lisp
      ;; git
      ;; markdown
-     ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
      ;; syntax-checking
      ;; version-control
      )
