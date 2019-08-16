@@ -5,7 +5,7 @@ STATE=`nmcli networking connectivity`
 if [ $STATE = 'full' ]
 then
     ~/.dotfiles/mail/msmtp-runqueue.sh
-    mbsync -qq gwenlofmanio
+    mbsync -a
     notmuch new
     afew -tn
     exit 0
