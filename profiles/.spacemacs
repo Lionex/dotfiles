@@ -352,23 +352,22 @@ you should place your code here."
       (notmuch-search-tag (list "-inbox" "+spam" "-unread"))
       (next-line)))
 
-  (define-key notmuch-search-mode-map "r"
+  (define-key notmuch-search-mode-map "R"
     (lambda ()
-      "mark message as spam"
+      "mark message as read"
       (interactive)
-      (notmuch-search-tag (list "-unread"))
-      (next-line)))
+      (notmuch-search-tag (list "-unread"))))
 
-  (define-key notmuch-search-mode-map "a"
+  (define-key notmuch-search-mode-map "A"
     (lambda ()
-      "mark message as spam"
+      "Move to account inbox"
       (interactive)
       (notmuch-search-tag (list "-inbox" "+account"))
       (next-line)))
 
-  (define-key notmuch-search-mode-map "l"
+  (define-key notmuch-search-mode-map "L"
     (lambda ()
-      "mark message as spam"
+      "move to list inbox"
       (interactive)
       (notmuch-search-tag (list "-inbox" "+lists"))
       (next-line)))
@@ -392,8 +391,8 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(notmuch-saved-searches
-   '((:name "new mail" :query "tag:inbox AND 1551416400.." :key "i" :sort-order newest-first)
-     (:name "inbox" :query "tag:inbox AND ..1551416400" :key "I" :sort-order newest-first)
+   '((:name "new mail" :query "tag:inbox AND 1551416400.. NOT tag:replied" :key "i" :sort-order newest-first)
+     (:name "inbox" :query "tag:inbox" :key "I" :sort-order newest-first)
      (:name "unread" :query "tag:unread" :key "n")
      (:name "flagged" :query "tag:flagged" :key "f")
      (:name "sent" :query "tag:sent" :key "t" :sort-order newest-first)
@@ -406,9 +405,11 @@ you should place your code here."
      (:name "git" :query "tag:git AND tag:unread")
      (:name "increment mag" :query "from:increment.com AND tag:unread")
      (:name "lists" :query "tag:lists AND tag:unread")
-     (:name "SIGGRAPH TL 2019" :query "tag:sv2019 AND tag:unread")))
+     (:name "SIGGRAPH TL 2019" :query "tag:sv2019 AND tag:unread")
+     (:name "travel" :query "tag:travel AND tag:unread")))
  '(package-selected-packages
-   '(notmuch flyspell-correct-ivy flyspell-correct auto-dictionary mmm-mode markdown-toc gh-md yaml-mode crux toml-mode racer pos-tip cargo markdown-mode rust-mode ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy)))
+   '(glsl-mode stickyfunc-enhance srefactor disaster cmake-mode clang-format org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode notmuch flyspell-correct-ivy flyspell-correct auto-dictionary mmm-mode markdown-toc gh-md yaml-mode crux toml-mode racer pos-tip cargo markdown-mode rust-mode ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy))
+ '(send-mail-function 'mailclient-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
