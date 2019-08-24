@@ -12,6 +12,6 @@ __set_prompt() {
   # If the last command didn't exit 0, display the exit code
   [ "$EXIT" -ne "0" ] && PS1+="$EXIT "
 
-  PS1+="$(glit "$GIT_FMT" -e "$PS1_FMT")"
+  PS1+="$(glit "$GIT_FMT" -b -e "$PS1_FMT")"
 }
 export PROMPT_COMMAND=__set_prompt
