@@ -18,6 +18,7 @@ echo -e "\n\t${BOLD}System profiles...${NC}\n"
 ln -sbv "$DIR/.bashrc" ~
 ln -sbv "$DIR/profiles/.bash_profile" ~
 ln -sbv "$DIR/profiles/.inputrc" ~
+ln -sbv "$DIR/profiles/fish" ~/.config/
 
 # Text editor config
 echo -e "\n\t${BOLD}Text editors...${NC}\n"
