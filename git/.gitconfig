@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [core]
-	editor = "emacsclient -nw"
+	editor = "vi"
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes_global
 	pager = delta --dark
