@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export GIT_FMT="\[#g;*(\b)#r(\B(#~(' ⇒ ')))#w(\(#~;*(\+('↑')\-('↓')))\<#g(\M\A\R\D)#r(\m\a\u\d)>\{#m;*;_(\h('@'))})]' '#b;*('\w')'\n '"
+export GIT_FMT="[#g*(b)#r(B(#~(' ⇒ ')))#w(\(#~*(+('↑')-('↓'))) #~(<#g(MARD)#r(maud)>{#m*_(h('@'))}))] #b*('\w')'\n '"
 
-export PS1_FMT="#g;*('\h')' '#b;*('\w')'\n '"
+export PS1_FMT="#g*('\h') #b*('\w')'\n '"
 
 __set_prompt() {
   local EXIT="$?"
