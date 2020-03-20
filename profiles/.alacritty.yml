@@ -28,10 +28,6 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-  faux_multiplier: 3
-  auto_scroll: false
-
-tabspaces: 4
 
 # Font configuration (changes require restart)
 font:
@@ -55,12 +51,13 @@ font:
 
 draw_bold_text_with_bright_colors: true
 
+# Colors (Gruvbox dark)
 colors:
   # Default colors
   primary:
     # hard contrast: background = '0x1d2021'
     background: '0x282828'
-    # soft contrast: background = '0x32302f'
+    # soft contrast: background: '0x32302f'
     foreground: '0xebdbb2'
 
   # Normal colors
