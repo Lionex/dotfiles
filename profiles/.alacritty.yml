@@ -24,6 +24,8 @@ window:
   decorations: full
   startup_mode: Windowed
   gtk_theme_variant: None
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
 
 scrolling:
   history: 10000
@@ -82,7 +84,7 @@ colors:
     cyan:    '0x8ec07c'
     white:   '0xebdbb2'
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
@@ -93,9 +95,6 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   # When set to `true`, selected text will be copied to the primary clipboard.
   save_to_clipboard: false
-
-# Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
 
 cursor:
   #   - ▇ Block
