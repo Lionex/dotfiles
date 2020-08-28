@@ -12,6 +12,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 
 [filter "nbstrip_full"]
 clean = "jq --indent 1 \
