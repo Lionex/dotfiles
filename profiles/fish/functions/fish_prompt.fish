@@ -5,7 +5,8 @@ function fish_prompt
     # make tilde character green
     set -l path (string replace -r "'~" "#c*('~')'" -- $path)
 
-    set -l prompt \'| \'
+
+    set -l prompt "'> '"
     # make prompt character red on error
     if test "$error" -ne 0
         set prompt "#r($prompt)"
