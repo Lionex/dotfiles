@@ -1,10 +1,13 @@
+;; Start up to a more minimal text editor
+
 (setq inhibit-startup-message t)
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
+(menu-bar-mode -1) ; no menu bar
+(scroll-bar-mode -1) ; no visible scrollbar
+(tool-bar-mode -1) ; no toolbar
+(tooltip-mode -1) ; no tooltips
+(set-fringe-mode 10) ; horizontal padding
+(setq visible-bell t) ; visual instead of audio indicator for errors
 
-(menu-bar-mode -1)
-
-(setq visible-bell t)
+(set-face-attribute 'fixed-pitch nil :font "Source Code Pro" :height 12)
+(load-theme 'tango-dark)
