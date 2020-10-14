@@ -1,8 +1,8 @@
-;;; Configuration --- configuration for emacs
+;;; Commentary --- configuration for emacs
+
+;;; Code:
 
 ;; Start up to a more minimal text editor
-
-;;; Code
 
 (setq inhibit-startup-message t)
 
@@ -13,6 +13,7 @@
 (set-fringe-mode 10) ; horizontal padding
 (setq visible-bell t) ; visual instead of audio indicator for errors
 
+;; Set Default font and font size
 
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
 (set-face-attribute 'default t :font "Source Code Pro")
@@ -161,17 +162,3 @@
   :hook (rust-mode . cargo-minor-mode))
 
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (counsel-projectile which-key use-package toml-mode rainbow-delimiters projectile lsp-ivy ivy-rich helpful flycheck-rust doom-themes doom-modeline counsel company cargo))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
