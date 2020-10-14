@@ -1,4 +1,7 @@
-;;; Commentary --- configuration for emacs
+;;; Configuration --- my config for emacs
+
+;;; Commentary:
+;; Setting up Emacs as a minimal text editor with support for LSP
 
 ;;; Code:
 
@@ -12,6 +15,10 @@
 (tooltip-mode -1) ; no tooltips
 (set-fringe-mode 10) ; horizontal padding
 (setq visible-bell t) ; visual instead of audio indicator for errors
+(setq create-lockfiles nil) ; don't create .# files
+(setq make-backup-files nil) ; don't create backfup files
+
+(setq-default indent-tabs-mode nil) ; spaces over tabs
 
 ;; Set Default font and font size
 
@@ -27,8 +34,8 @@
 (global-display-line-numbers-mode t)
 
 (dolist (mode '(org-mode-hook
-		term-mode-hook
-		eshell-mode-hook))
+                term-mode-hook
+                eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Initialize package sources
@@ -36,8 +43,8 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("gnu" . "https://elpa.gnu.org/packages/")))
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -70,9 +77,9 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history))
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
   :config (setq ivy-initial-inputs-alist nil))
 
 (use-package swiper)
@@ -82,8 +89,8 @@
   :bind (("C-s" . swiper)
          :map ivy-minibuffer-map
          ("TAB" . ivy-partial-or-done)
-	 ("C-j" . ivy-immediate-done)
-	 ("RET" . ivy-alt-done)
+         ("C-j" . ivy-immediate-done)
+         ("RET" . ivy-alt-done)
          :map ivy-switch-buffer-map
          ("C-d" . ivy-switch-buffer-kill)
          :map ivy-reverse-i-search-map
@@ -119,7 +126,7 @@
   :custom ((projectile-completion-system 'ivy))
   :bind-keymap ("C-c p" . projectile-command-map)
   :init (when (file-directory-p "~/Code")
-	  (setq projectile-project-search-path '("~/Code"))))
+          (setq projectile-project-search-path '("~/Code"))))
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
@@ -129,6 +136,21 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package whitespace-mode
+  :ensure nil ; don't actually install the package
+  :preface
+  (defun glfmn/setup-whitespace ()
+    (lambda ()
+      (setq whitespace-display-mappings
+            '((space-mark 32 [183] [46])
+              (space-mark 160 [164] [95])
+              (newline-mark 10 [#x23CE 10] [36 10])
+              (tab-mark 9 [187 9] [92 9])))))
+  :hook
+  (prog-mode . whitespace-mode)
+  (before-save . whitespace-cleanup)
+  (whitespace-mode . glfmn/setup-whitespace))
+
 ;; Error checking
 (use-package flycheck
   :hook (prog-mode . flycheck-mode))
@@ -137,12 +159,12 @@
 (use-package company
   :hook (prog-mode . company-mode)
   :config (setq company-tooltip-align-annotations t
-		company-minimum-prefix-length 2))
+                company-minimum-prefix-length 2))
 
 ;; Language server protocol
 (use-package lsp-mode
-    :hook ((lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp)
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
 (use-package lsp-ivy
   :commands lsp-ivy-workspace-symbol)
