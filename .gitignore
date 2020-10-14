@@ -1,3 +1,5 @@
 # ignore emacs installed packages
 emacs/auto-save-list
 emacs/elpa
+emacs/.lsp-session-v1
+emacs/projectile-bookmarks.eld
