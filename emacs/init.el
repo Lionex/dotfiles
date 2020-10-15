@@ -186,7 +186,9 @@
 ;; Rust programming
 
 (use-package rust-mode
-  :hook (rust-mode . lsp))
+  :hook (rust-mode . lsp)
+  :config
+  (setq rust-format-on-save t))
 
 (use-package flycheck-rust
   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
