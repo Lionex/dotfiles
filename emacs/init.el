@@ -18,6 +18,9 @@
 (setq create-lockfiles nil) ; don't create .# files
 (setq make-backup-files nil) ; don't create backfup files
 
+; Set the initial window size
+(if (window-system) (set-frame-size (selected-frame) 180 50))
+
 ;; Set Default font and font size
 
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
