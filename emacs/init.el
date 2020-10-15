@@ -134,6 +134,12 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package smartparens
+  :hook
+  (emacs-lisp-mode . smartparens-strict-mode)
+  (rust-mode . smartparens-mode)
+  :config (require 'smartparens-config))
+
 ;; Spaces over tabs
 (setq-default indent-tabs-mode nil)
 
