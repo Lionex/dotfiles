@@ -134,7 +134,9 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package smartparens
+(use-package smartparens-config
+  :ensure smartparens
+  :diminish smartparens-mode
   :hook
   (emacs-lisp-mode . smartparens-strict-mode)
   (rust-mode . smartparens-mode)
@@ -143,7 +145,9 @@
          ("C-M-n" . sp-next-sexp)
          ("C-M-p" . sp-previous-sexp)
          ("C-M-f" . sp-forward-sexp)
-         ("C-M-b" . sp-backward-sexp))
+         ("C-M-b" . sp-backward-sexp)
+         ("M-f" . sp-forward-symbol)
+         ("M-b" . sp-backward-symbol))
   :config (require 'smartparens-config))
 
 ;; Spaces over tabs
