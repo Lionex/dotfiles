@@ -18,8 +18,6 @@
 (setq create-lockfiles nil) ; don't create .# files
 (setq make-backup-files nil) ; don't create backfup files
 
-(setq-default indent-tabs-mode nil) ; spaces over tabs
-
 ;; Set Default font and font size
 
 (add-to-list 'default-frame-alist '(font . "Source Code Pro"))
@@ -136,20 +134,30 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; Spaces over tabs
+(setq-default indent-tabs-mode nil)
+
+(defun disable-tabs ()
+  "Use spaces for indentation."
+  (setq indent-tabs-mode nil))
+
+(dolist (mode '(prog-mode-hook
+                lisp-mode-hook
+                emacs-lisp-mode-hook))
+  (add-hook mode 'disable-tabs))
+
+;; Highlight whitespace
 (use-package whitespace-mode
   :ensure nil ; don't actually install the package
-  :preface
-  (defun glfmn/setup-whitespace ()
-    (lambda ()
-      (setq whitespace-display-mappings
-            '((space-mark 32 [183] [46])
-              (space-mark 160 [164] [95])
-              (newline-mark 10 [#x23CE 10] [36 10])
-              (tab-mark 9 [187 9] [92 9])))))
   :hook
   (prog-mode . whitespace-mode)
   (before-save . whitespace-cleanup)
-  (whitespace-mode . glfmn/setup-whitespace))
+  (whitespace-mode . (lambda ()
+                       (setq whitespace-display-mappings
+                             '((space-mark 32 [183] [46])
+                               (space-mark 160 [164] [95])
+                               (newline-mark 10 [#x23CE 10] [36 10])
+                               (tab-mark 9 [187 9] [92 9]))))))
 
 ;; Error checking
 (use-package flycheck
