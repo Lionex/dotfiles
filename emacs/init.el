@@ -138,6 +138,12 @@
   :hook
   (emacs-lisp-mode . smartparens-strict-mode)
   (rust-mode . smartparens-mode)
+  :bind (("C-M-a" . sp-beginning-of-sexp)
+         ("C-M-e" . sp-end-of-sexp)
+         ("C-M-n" . sp-next-sexp)
+         ("C-M-p" . sp-previous-sexp)
+         ("C-M-f" . sp-forward-sexp)
+         ("C-M-b" . sp-backward-sexp))
   :config (require 'smartparens-config))
 
 ;; Spaces over tabs
