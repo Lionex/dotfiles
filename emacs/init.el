@@ -137,12 +137,11 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; Use smartparens for rust and perhaps other C-like
 (use-package smartparens-config
   :ensure smartparens
   :diminish smartparens-mode
-  :hook
-  (emacs-lisp-mode . smartparens-strict-mode)
-  (rust-mode . smartparens-mode)
+  :hook (rust-mode . smartparens-mode)
   :bind (("C-M-a" . sp-beginning-of-sexp)
          ("C-M-e" . sp-end-of-sexp)
          ("C-M-n" . sp-next-sexp)
@@ -150,8 +149,16 @@
          ("C-M-f" . sp-forward-sexp)
          ("C-M-b" . sp-backward-sexp)
          ("M-f" . sp-forward-symbol)
-         ("M-b" . sp-backward-symbol))
+         ("M-b" . sp-backward-symbol)
+         ("C-k" . sp-kill-hybrid-sexp)
+         ("C-)" . sp-slurp-hybrid-sexp))
   :config (require 'smartparens-config))
+
+;; Use paredit for everything else
+(use-package paredit
+  :diminish paredit-mode
+  :hook ((emacs-lisp-mode . enable-paredit-mode)
+         (ielm-mode . enable-paredit-mode)))
 
 ;; Spaces over tabs
 (setq-default indent-tabs-mode nil)
